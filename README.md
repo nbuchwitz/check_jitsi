@@ -110,3 +110,7 @@ It's possible to check if a certain metric is within the specified thresholds fo
 OK - 0 total_conferences_failed |total_conferences_failed=0;;5;10
 
 ```
+
+## Integration in Icinga2
+
+Example configuration files for Icinga2 are in the folder `icinga/`.
