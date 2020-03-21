@@ -60,6 +60,8 @@ after:
 JAVA_SYS_PROPS="-Dnet.java.sip.communicator.SC_HOME_DIR_LOCATION=/etc/jitsi -Dnet.java.sip.communicator.SC_HOME_DIR_NAME=videobridge -Dnet.java.sip.communicator.SC_LOG_DIR_LOCATION=/var/log/jitsi -Djava.util.logging.config.file=/etc/jitsi/videobridge/logging.properties --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED"
 ```
 
+More more details see here https://github.com/jitsi/jitsi-videobridge/issues/1127#issuecomment-601539870.
+
 ## Usage
 
 ```
