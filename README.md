@@ -91,7 +91,7 @@ s_completed,total_conferences_created,total_conferences_failed,total_partially_f
 
 **Check jitsi health**
 ```
-./check_pve.py -m health
+./check_jitsi.py -m health
 OK - Jitsi videobridge is healthy 
 ```
 
