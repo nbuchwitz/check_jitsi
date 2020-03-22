@@ -124,6 +124,9 @@ class CheckJitsi:
         p.add_argument("--ignore-metric", dest='metric_blacklist', metavar='METRIC', action='append', default=[],
                        required=False,
                        help='Ignore this metric in the performance data')
+        p.add_argument("--append-metric", dest='metric_whitelist', metavar='METRIC', action='append', default=[],
+                       required=False,
+                       help='Append this metric in the performance data')
 
         self.args = p.parse_args()
 
@@ -153,6 +156,10 @@ class CheckJitsi:
 
         if metrics is not None and self.args.all_metrics:
             metrics.update(self.statistics)
+        elif metrics is not None and self.args.metric_whitelist:
+            for metric in self.args.metric_whitelist:
+                if metric in self.statistics:
+                    metrics[metric] = self.statistics[metric]
 
         if metrics:
             perfdata = '|'

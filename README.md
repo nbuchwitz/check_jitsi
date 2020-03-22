@@ -110,7 +110,13 @@ It's possible to check if a certain metric is within the specified thresholds fo
 ```
 ./check_jitsi.py -m total_conferences_failed -w 5 -c 10
 OK - 0 total_conferences_failed |total_conferences_failed=0;;5;10
+```
 
+Other metrics could also be exported within the performance data:
+
+```
+./check_jitsi.py -m total_conferences_failed -w 5 -c 10 --append-metrics conferences
+OK - 0 total_conferences_failed |total_conferences_failed=0;;5;10 conferences=2
 ```
 
 ## Integration in Icinga2
