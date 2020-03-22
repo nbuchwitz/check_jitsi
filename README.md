@@ -68,7 +68,7 @@ More more details see here https://github.com/jitsi/jitsi-videobridge/issues/112
 usage: check_jitsi.py [-h] [-H HOSTNAME] [-p PORT] -m
                       {health,participants,conferences,audiochannels,videochannels,videostreams,total_conferences_completed,total_conferences_created,total_conferences_failed,total_partially_failed_conferences,jitter_aggregate,total_no_payload_channels,total_no_transport_channels}
                       [-w THRESHOLD] [-c THRESHOLD] [--all-metrics]
-                      [--ignore-metric METRIC]
+                      [--ignore-metric METRIC] [--append-metric METRIC]
 
 Check command for JVB via API
 
@@ -77,8 +77,7 @@ optional arguments:
   -H HOSTNAME, --hostname HOSTNAME
                         JVB private api hostname
   -p PORT, --port PORT  JVB private api port
-  -m {health,participants,conferences,audiochannels,videochannels,videostreams,total_conferences_completed,total_conferences_created,total_conferences_failed,total_partially_failed_conferences,jitter_aggregate,total_no_payload_channels,total_no_transport_channels}, --mode {health,participants,conferences,audiochannels,videochannels,videostreams,total_conference
-s_completed,total_conferences_created,total_conferences_failed,total_partially_failed_conferences,jitter_aggregate,total_no_payload_channels,total_no_transport_channels}
+  -m {health,participants,conferences,audiochannels,videochannels,videostreams,total_conferences_completed,total_conferences_created,total_conferences_failed,total_partially_failed_conferences,jitter_aggregate,total_no_payload_channels,total_no_transport_channels}, --mode {health,participants,conferences,audiochannels,videochannels,videostreams,total_conferences_completed,total_conferences_created,total_conferences_failed,total_partially_failed_conferences,jitter_aggregate,total_no_payload_channels,total_no_transport_channels}
                         Check mode
   -w THRESHOLD, --warning THRESHOLD
                         Warning threshold for check value
@@ -87,6 +86,8 @@ s_completed,total_conferences_created,total_conferences_failed,total_partially_f
   --all-metrics
   --ignore-metric METRIC
                         Ignore this metric in the performance data
+  --append-metric METRIC
+                        Append this metric in the performance data
 ```
 
 ## Examples
