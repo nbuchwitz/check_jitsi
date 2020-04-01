@@ -25,11 +25,12 @@
 # ------------------------------------------------------------------------------
 
 
-import sys
-import re
-import requests
 import argparse
+import re
+import sys
 from enum import Enum
+
+import requests
 
 
 class CheckState(Enum):
@@ -99,7 +100,7 @@ class CheckJitsi:
                               'jitter_aggregate', 'total_no_payload_channels', 'total_no_transport_channels']
 
         self.parse_args()
-        self._baseurl = f"http://{self.args.hostname}:{self.args.port}"
+        self._baseurl = "http://{}:{}".format(self.args.hostname, self.args.port)
 
         self._state = CheckState.OK
 
@@ -163,7 +164,8 @@ class CheckJitsi:
 
         if metrics:
             perfdata = '|'
-            perfdata += ' '.join([f"{k}={int(v)}" if type(v) == bool else f"{k}={v}" for k, v in metrics.items()])
+            perfdata += ' '.join(
+                ["{}={}".format(k, int(v)) if type(v) == bool else "{}={}".format(k, v) for k, v in metrics.items()])
 
         print(message, perfdata)
         sys.exit(rc.value)
@@ -171,7 +173,7 @@ class CheckJitsi:
     def _fetch(self, uri):
         try:
             response = requests.get(
-                f"{self._baseurl}{uri}",
+                "{}{}".format(self._baseurl, uri),
             )
         except requests.exceptions.ConnectTimeout:
             self.check_result(CheckState.UNKNOWN, "Could not connect to JVB API: Connection timeout")
@@ -189,14 +191,14 @@ class CheckJitsi:
         msg = "Jitsi videobridge is healthy"
 
         if not healthy:
-            msg = f"Jitsi videobridge health check failed ({r.status_code})"
+            msg = "Jitsi videobridge health check failed ({})".format(r.status_code)
             self._state = CheckState.CRITICAL
 
         self.check_result(self._state, msg, {})
 
     def _check_simple(self, name):
         value = self.statistics.get(name, 0)
-        msg = f"{value} {name}"
+        msg = "{} {}".format(value, name)
 
         if self._criticial.check(value):
             self._state = CheckState.CRITICAL
@@ -204,12 +206,12 @@ class CheckJitsi:
             self._state = CheckState.WARNING
 
         self.check_result(self._state, msg,
-                          {name: f"{value};;{self.args.threshold_warning};{self.args.threshold_critical}"})
+                          {name: "{};;{};{}".format(value, self.args.threshold_warning, self.args.threshold_critical)})
 
     def check(self):
         if self.args.mode == 'health':
             self.check_health()
-        if self.args.mode in self._simple_modes:
+        elif self.args.mode in self._simple_modes:
             self._check_simple(self.args.mode)
 
 
